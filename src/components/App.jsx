@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Statistics from './Statistics/Statistics';
-// import Feedback from './Feedback/Feedback';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
+import NotificationMessage from './NotificationMessage/NotificationMessage';
 
 export default class App extends Component {
   state = {
@@ -17,14 +18,17 @@ export default class App extends Component {
 
   render() {
     const { good, neutral, bad } = this.state;
+    const option = Object.keys(this.state);
+    console.log(option);
     const totalFeedback = good + neutral + bad;
     const positiveFeedback = ((good / totalFeedback) * 100).toFixed();
     return (
       <div>
         <h1>Please leave feedback</h1>
-        <button onClick={() => this.handleFeedback('good')}>Good</button>
-        <button onClick={() => this.handleFeedback('neutral')}>Neutral</button>
-        <button onClick={() => this.handleFeedback('bad')}>Bad</button>
+        <FeedbackOptions
+          options={option}
+          onLeaveFeedback={this.handleFeedback}
+        />
         <h2>Statistics</h2>
         {totalFeedback > 0 ? (
           <Statistics
@@ -33,7 +37,7 @@ export default class App extends Component {
             totalFeedback={totalFeedback}
           />
         ) : (
-          <p>Поки немає відгуків.</p>
+          <NotificationMessage />
         )}
       </div>
     );
