@@ -1,12 +1,12 @@
 import React from 'react';
-
+import css from './Statistics.module.css'
 const Statistics = ({
   feedback: { good, neutral, bad },
   positiveFeedback,
   totalFeedback,
 }) => {
   return (
-    <ul>
+    <ul className={css.list}>
       <li>
         <span>Good:</span>
         <span>{good}</span>

@@ -31,24 +31,25 @@ export default class App extends Component {
   render() {
     const option = Object.keys(this.state);
     return (
-      <div>
+      <div className="container">
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={option}
             onLeaveFeedback={this.handleFeedback}
           />
         </Section>
-        <Section title="Statistics">
-          {this.countTotalFeedback() > 0 ? (
+
+        {this.countTotalFeedback() > 0 ? (
+          <Section title="Statistics">
             <Statistics
               feedback={this.state}
               positiveFeedback={this.countPositiveFeedbackPercentage()}
               totalFeedback={this.countTotalFeedback()}
             />
-          ) : (
-            <NotificationMessage />
-          )}
-        </Section>
+          </Section>
+        ) : (
+          <NotificationMessage />
+        )}
       </div>
     );
   }
